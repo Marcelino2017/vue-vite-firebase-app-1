@@ -1,13 +1,15 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from '../stores/user.js'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore();
+const router = useRouter()
 
 const email = ref('')
 const password = ref('')
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   console.log(password.value.length);
   console.log(email.value);
   console.log(password.value);
@@ -16,7 +18,8 @@ const handleSubmit = () => {
   } */
   
   console.log("Form submitted");
-  userStore.registerUser(email.value, password.value);
+  await userStore.registerUser(email.value, password.value);
+  //router.push('/')
 };
 </script>
 
