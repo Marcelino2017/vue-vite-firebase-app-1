@@ -9,7 +9,7 @@ const userStore = useUserStore();
 
 <template>
     <h1>Home</h1>
-    <p>{{ userStore.userData }} </p>
+
 </template>
 
 <style scoped>
