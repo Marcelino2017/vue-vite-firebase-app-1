@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 
 const userStore = useUserStore();
 const router = useRouter()
-
 const email = ref('')
 const password = ref('')
 
@@ -29,7 +28,7 @@ const handleSubmit = async () => {
     <form @submit.prevent="handleSubmit">
       <input type="email" v-model.trim="email" placeholder="Ingrese email" />
       <input type="password" v-model.trim="password" placeholder="Ingrese password" />
-      <button type="submit">Crear usuario</button>
+      <button type="submit" :disabled="userStore.loading" >Crear usuario</button>
     </form>
   </div>
 </template>

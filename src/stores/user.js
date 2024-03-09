@@ -5,11 +5,13 @@ import router from "../router";
 
 export const useUserStore = defineStore('userStore', {
     state: () => ({
-        userData: null
+        userData: null,
+        loading: false
     }),
     /* Las acciones son el equivalente de los métodos en los componentes. */
     actions: {
         async registerUser(email, password) {
+            this.loading = true;
             try {
                 const { user } = await createUserWithEmailAndPassword(
                     auth, 
@@ -21,9 +23,12 @@ export const useUserStore = defineStore('userStore', {
                 router.push('/')
             } catch (error) {
                 console.log(error);
+            } finally {
+                this.loading = false;
             }
         },
         async loginUser(email, password) {
+            this.loading = true;
             try {
                 const { user } = await signInWithEmailAndPassword(auth, email, password)
                 console.log(user);
@@ -31,6 +36,8 @@ export const useUserStore = defineStore('userStore', {
                 router.push('/')
             } catch (error) {
                 console.log(error);
+            } finally {
+                this.loading = false;
             }
         },
         async logoutUser() {

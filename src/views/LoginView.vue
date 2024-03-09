@@ -29,7 +29,7 @@ const handleSubmit = async () => {
     <form @submit.prevent="handleSubmit">
       <input type="email" v-model.trim="email" placeholder="Ingrese email" />
       <input type="password" v-model.trim="password" placeholder="Ingrese password" />
-      <button type="submit">Acceso</button>
+      <button type="submit" :disabled="userStore.loading">Acceso</button>
     </form>
   </div>
 </template>
