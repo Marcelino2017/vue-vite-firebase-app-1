@@ -6,13 +6,15 @@ import { useUserStore } from "./stores/user.js";
 
 const requireAuth = async(to, from, next) => {
     const userStore = useUserStore();
+    userStore.loadingSesion = true;
     const user = await userStore.currentUser();
-    console.log(user);
+    
     if (user) {
         next();
     } else {
         next('/login');
     }
+    userStore.loadingSesion = false;
 };
 
 const routes = [

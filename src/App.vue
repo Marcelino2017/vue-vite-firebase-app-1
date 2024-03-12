@@ -8,11 +8,12 @@ const userStore = useUserStore();
 
 <template>
   <h1>Vue</h1>
-  <nav>
-    <router-link to="/">Home</router-link>  |
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/register">Register</router-link> |
-    <button @click="userStore.logoutUser" >Logout</button>
+  <nav v-if="!userStore.loadingSesion">
+    <router-link to="/" v-if="userStore.userData?.email" > | Home |</router-link>  
+    <router-link to="/login" v-if="!userStore.userData?.email">| Login |</router-link> 
+    <router-link to="/register" v-if="!userStore.userData?.email"> Register |</router-link> 
+    <button @click="userStore.logoutUser" v-if="userStore.userData?.email"> Logout</button>
   </nav>
+  <div v-if="userStore.loadingSesion">Cargando...</div>
   <router-view />
 </template>

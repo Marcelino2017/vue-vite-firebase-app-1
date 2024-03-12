@@ -11,7 +11,8 @@ import router from "../router";
 export const useUserStore = defineStore('userStore', {
     state: () => ({
         userData: null,
-        loading: false
+        loading: false,
+        loadingSesion: false
     }),
     /* Las acciones son el equivalente de los métodos en los componentes. */
     actions: {
