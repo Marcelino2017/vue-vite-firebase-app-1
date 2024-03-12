@@ -12,9 +12,9 @@ const handleSubmit = async () => {
   console.log(password.value.length);
   console.log(email.value);
   console.log(password.value);
- /*  if (email.value|| password.value) {
-    return alert("Por favor, complete todos los campos");
-  } */
+  if (!email.value || password.value.length < 6) {
+    alert("ingresa los campos");
+  }
   
   console.log("Form submitted");
   await userStore.registerUser(email.value, password.value);

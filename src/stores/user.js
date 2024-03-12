@@ -1,5 +1,10 @@
 import { defineStore } from "pinia";
-import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword} from "firebase/auth";
+import { 
+    createUserWithEmailAndPassword, 
+    signOut, 
+    signInWithEmailAndPassword, 
+    onAuthStateChanged
+} from "firebase/auth";
 import { auth } from "../firebaseConfig/firebase";
 import router from "../router";
 
@@ -49,6 +54,20 @@ export const useUserStore = defineStore('userStore', {
             } catch (error) {
                 console.log(error);
             }
+        },
+        async currentUser() {
+            return new Promise((resolve, reject) => {
+                const unsubcribe = onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        this.userData = { email: user.email, uid: user.uid }
+                    } else {
+                        this.userData = null;
+                    }
+                    resolve(user);
+                }, (e) => reject(e))
+
+                return unsubcribe;
+            })
         }
     }
 })

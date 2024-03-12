@@ -16,10 +16,7 @@ const handleSubmit = async () => {
  /*  if (email.value|| password.value) {
     return alert("Por favor, complete todos los campos");
   } */
-  
-  console.log("Form submitted");
   await userStore.loginUser(email.value, password.value);
-  //router.push('/')
 };
 </script>
 
