@@ -10,9 +10,6 @@ const email = ref('')
 const password = ref('')
 
 const handleSubmit = async () => {
-  console.log(password.value.length);
-  console.log(email.value);
-  console.log(password.value);
   if (!email.value || password.value.length < 6) {
     alert("ingresa los campos");
   }
