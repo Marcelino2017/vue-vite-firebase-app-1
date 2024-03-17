@@ -8,7 +8,6 @@ const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
 
 databaseStore.getUrls()
-console.log(databaseStore.documents);
 
 </script>
 
@@ -19,7 +18,9 @@ console.log(databaseStore.documents);
       <li v-for="item of databaseStore.documents" :key="item.id" >
           {{ item.id}} 
           <br> 
-          {{ item.name}}
+          {{ item.data.name}}
+          <br>
+          {{ item.data.url}}
       </li>
     </ul>
 

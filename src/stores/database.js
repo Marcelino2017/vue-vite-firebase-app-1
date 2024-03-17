@@ -1,30 +1,32 @@
-import { defineStore } from "pinia";
 import { collection, query, getDocs, where } from "firebase/firestore/lite";
+import { defineStore } from "pinia";
 import { db, auth } from "../firebaseConfig/firebase";
+import { ref } from "vue";
 
 
 
 export const useDatabaseStore = defineStore('database', {
     state: () => ({
-        documents: [],
+        documents: ref([]),
     }),
     actions: {
         async getUrls() {
-
             try {
-                console.log(auth.currentUser.uid);
-                const q = query(collection(db, "urls"), where("user", "==", auth.currentUser.uid));
+                const q = query(
+                    collection(db, "urls"), 
+                    where("user", "==", auth.currentUser.uid)
+                );
+
                 const querySnapshot = await getDocs(q);
+
                 querySnapshot.forEach((doc) => {
-                    console.log(doc.id,doc.data());
-                    this.document.push({
+                    this.documents.push({
                         id: doc.id,
                         data: doc.data(),
                     });
-                    console.log(this.document);  
                 });
             } catch (error) {
-                
+                console.log(error);
             } finally { 
 
             }
